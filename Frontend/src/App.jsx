@@ -1,5 +1,5 @@
 import './App.css'
-import Home from './home'
+import Home from './Home'
 import Navbar from './Navbar'
 import { useState } from 'react'
 import Upload from './upload'
@@ -50,7 +50,7 @@ function App() {
             <Upload file={file} setFile={setFile} uploadFile={uploadFile} fileURL={fileURL} setFileURL={setFileURL}/>
           </div>
         ):(
-          <Result file={file} text={text} fileURL={fileURL} />
+          <Result file={file} transcription={text} fileURL={fileURL} />
         )}
       </div>
     </div>

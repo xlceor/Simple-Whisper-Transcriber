@@ -118,7 +118,7 @@ const Upload = ({ file, setFile, uploadFile, fileURL, setFileURL }) => {
           <div className='flex flex-col justify-center gap-5 items-center'>
             <FaCloudUploadAlt className="w-20 h-20" />
             <p>Arrastra y suelta tu archivo o da click para subirlo</p>
-            <button type="button" onClick={triggerFileUpload} className='bg-gradient-to-br from-fuchsia-600 via-blue-600 to-sky-500' disabled={file !== null}>
+            <button type="button" onClick={triggerFileUpload} className='bg-gradient-to-br from-fuchsia-600 to-blue-600 to-60%' disabled={file !== null}>
               Select File
             </button>
           </div>
