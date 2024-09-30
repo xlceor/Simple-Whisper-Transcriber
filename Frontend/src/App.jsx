@@ -1,60 +1,63 @@
-import './App.css'
-import Home from './Home'
-import Navbar from './Navbar'
-import { useState } from 'react'
-import Upload from './upload'
-import Result from './result'
+import './App.css';
+import Landing from './Landing';
+import Navbar from './Navbar';
+import { useState, useEffect } from 'react';
+import Result from './Result'; // Asegúrate de que la importación sea correcta
+import { Route, Routes, Navigate, useNavigate } from 'react-router-dom';
 
 function App() {
-  const [file, setFile] = useState(null)
+  const [file, setFile] = useState(null);
   const [text, setText] = useState('');
-  const [fileURL, setFileURL] = useState('');
+  const [status, setStatus] = useState('');
+  const navigate = useNavigate(); // Usar useNavigate para redirección
 
   const uploadFile = async (file) => {
     try {
-      // Crear un FormData para enviar el archivo al backend
+      
       const formData = new FormData();
       formData.append('audio', file);
+      
+      navigate('/result');
 
-      // Enviar el archivo al backend
       const response = await fetch('http://127.0.0.1:5000/', {
         method: 'POST',
         body: formData,
       });
 
       if (response.ok) {
-        // Suponiendo que el backend devuelve la duración del archivo
         const result = await response.json();
-        // setName(file.name);
-        // setDuration(result.duration);
-        setText(result.transcription)
-
+        setText(result.transcription);
+        setStatus(result.result);
         alert('File uploaded successfully!');
+
       } else {
         alert('Failed to upload file.');
+        navigate('/');
       }
     } catch (error) {
       console.error('Error uploading file:', error);
       alert('An error occurred while uploading the file.');
     }
   };
-  
+
+  // Efecto para redirigir si el estado no es "ok"
+  useEffect(() => {
+    if (status && status !== "ok") {
+      navigate('/'); // Redirigir a la raíz si status no es "ok"
+    }
+  }, [status, navigate]);
 
   return (
-    <div>
+    <div className='backdrop-blur-3xl'>
       <Navbar />
       <div className='flex pt-10'>
-        {!file ? (
-          <div className='flex w-full h-full items-center justify-around '>
-            <Home />
-            <Upload file={file} setFile={setFile} uploadFile={uploadFile} fileURL={fileURL} setFileURL={setFileURL}/>
-          </div>
-        ):(
-          <Result file={file} transcription={text} fileURL={fileURL} />
-        )}
+        <Routes>
+          <Route path="/" element={<Landing file={file} setFile={setFile} uploadFile={uploadFile} />} />
+          <Route path="/result" element={file ? <Result file={file} transcription={text} /> : <Navigate to="/" />} />
+        </Routes>
       </div>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;

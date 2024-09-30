@@ -1,8 +1,7 @@
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { FaFileDownload, FaCopy } from "react-icons/fa";
 
-const Result = ({ file, transcription, fileURL }) => {
-    const audioRef = useRef(null);
+const Result = ({ file, transcription}) => {
     const [name, setName] = useState("Archivo"); // Estado inicial
     
 
@@ -37,23 +36,8 @@ const Result = ({ file, transcription, fileURL }) => {
                 <div className="flex w-full">
                 {file ? (
                     <div className=" flex w-full px-5 pb-5 items-center justify-center">
-                        <div className="w-1/2 flex items-center justify-center ">
-                            {file.type.startsWith('audio') && (
-                                <div>
-                                    <audio src={fileURL} ref={audioRef}>
-                                        Your browser does not support the audio element.
-                                        </audio>
-                                </div>
-                                
-                            )}
-                            {file.type.startsWith('video') && (
-                                <video controls src={fileURL}>
-                                Your browser does not support the video element.
-                                </video>
-                            )}
-                        </div>
-                        <div className="flex w-full h-full flex-col bg-indigo-900/55">
-                            <div className="w-full flex p-5 bg-gray-900/30  justify-around">
+                        <div className="flex w-full h-full flex-col bg-indigo-900/45 shadow-xl">
+                            <div className="w-full flex p-5 bg-gray-900/40  justify-around">
                                 <div className="text-3xl flex font-bold">
                                 <input
                                     type="text"

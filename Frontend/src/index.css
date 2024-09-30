@@ -2,6 +2,11 @@
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 
+
+body {
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -11,7 +16,8 @@
   color: rgba(255, 255, 255, 0.87);
   /* background: linear-gradient( to right bottom, #6a00ff, #4c00ff, #2440dc, #1777d2); */
   background-color: #181739;
-
+  /* background: linear-gradient( to right top, #7124dc, #3c7be8, #7434ce); */
+  background: linear-gradient( to right top, #3c4ae8, #8544e0, #3c5ee8);
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
